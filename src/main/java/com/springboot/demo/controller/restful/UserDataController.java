@@ -21,7 +21,7 @@ import net.sf.json.JSONArray;
  * @version 1.0 
  * @date 2017年5月1日 下午8:11:02
  */
-@Controller
+@Controller()
 public class UserDataController {
 	
 	@Autowired

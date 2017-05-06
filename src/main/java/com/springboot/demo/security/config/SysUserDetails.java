@@ -31,7 +31,7 @@ public class SysUserDetails implements UserDetailsService{
 		}
 		SecurityUser securityUser = new SecurityUser(user);
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		authorities.add(new SimpleGrantedAuthority("ROLE_*"));
         return securityUser; //code9
 	}
 

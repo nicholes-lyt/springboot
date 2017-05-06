@@ -3,12 +3,16 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>user</title>
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_hader" th:content="${_csrf.headerName}"/>
 <link rel="stylesheet" href="/static/jquery-easyui-1.4.5/themes/default/easyui.css" />
 <link rel="stylesheet" href="/static/jquery-easyui-1.4.5/themes/icon.css" />
 <script src="/static/jquery-easyui-1.4.5/jquery.min.js" ></script>
 <script src="/static/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
  </head>
     <body>
+    	<h1 th:inline="text">头部：[[${	_csrf.token}]]</h1>
+    	<h1 th:inline="text">头部：[[${_csrf.headerName}]]</h1>
         <h1 th:inline="text">您好， [[${#httpServletRequest.remoteUser}]]!</h1>
         <p><a th:href="@{/admin}">前往管理员界面</a></p>
         <!-- <div class="datagrid-toolbar" style="height:30px;" id="toolbar">
@@ -21,7 +25,7 @@
 			                   singleSelect="false"   
 			                   rownumbers="true"      
 			                   striped="true"        
-			                   idField="goods_id"   
+			                   idField="id"   
 			                   nowrap="true">          
 			            </table>
 			    </div>
@@ -30,6 +34,18 @@
         </form>
         
          <script type="text/javascript">
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e,xhr,options){
+            	xhr.setRequestHeader(header,token);
+            });
+         	/* $.ajax({
+         		type: "post",
+         		url:"findUser",
+         		success:function(data){
+         			console.log(data);
+         		}
+         	}); */
          	$(function(){
          		$("#yp").datagrid({
                     pageNumber:1,

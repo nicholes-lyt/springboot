@@ -23,6 +23,7 @@ public class IndexController {
         return "user/admin";
     }
 	
+	@PreAuthorize("hasRole('user')")
 	@RequestMapping("/user")
     public String user(){
         return "user/user";
