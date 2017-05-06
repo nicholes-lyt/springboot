@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>user</title>
+<link rel="stylesheet" href="/static/jquery-easyui-1.4.5/themes/default/easyui.css" />
+<link rel="stylesheet" href="/static/jquery-easyui-1.4.5/themes/icon.css" />
+<script src="/static/jquery-easyui-1.4.5/jquery.min.js" ></script>
+<script src="/static/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+ </head>
+    <body>
+        <h1 th:inline="text">您好， [[${#httpServletRequest.remoteUser}]]!</h1>
+        <p><a th:href="@{/admin}">前往管理员界面</a></p>
+        <!-- <div class="datagrid-toolbar" style="height:30px;" id="toolbar">
+			    </div> -->
+			    <div style="min-height:220px;">
+			            <table id="yp"
+			            	   url="findUser"
+			                   border="false"         
+			                   fit="true"             
+			                   singleSelect="false"   
+			                   rownumbers="true"      
+			                   striped="true"        
+			                   idField="goods_id"   
+			                   nowrap="true">          
+			            </table>
+			    </div>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="登出"/>
+        </form>
+        
+         <script type="text/javascript">
+         	$(function(){
+         		$("#yp").datagrid({
+                    pageNumber:1,
+                    pageSize:20,
+                    queryParams:{"refresh":"1"},
+                    onBeforeLoad:function(param){
+                        $('#searchBtn').linkbutton('disable');
+                        $('#resetBtn').linkbutton('disable');
+                    },
+                    onLoadSuccess:function(data){
+                    },
+                    frozenColumns:[[
+                        {field:'ck',checkbox:true}
+                    ]],
+                    columns:[[
+                        {title:'用户名',field:'username',width:'100'},
+                        {title:'真实姓名',field:'realname',width:'100'},
+                        {title:'创建时间',field:'cratedate',width:'150'},
+                    ]]
+                });
+         	});
+    
+         </script>
+        
+    </body>
+</html>

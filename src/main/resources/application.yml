@@ -1,0 +1,44 @@
+
+spring:
+  application.name: springboot
+  profiles.active: test_local
+  thymeleaf.prefix: classpath:/views/
+  thymeleaf.mode: HTML5
+  thymeleaf.encoding: UTF-8
+  thymeleaf.content-type: text/html
+  thymeleaf.cache:  false
+  jpa.generate-ddl: true
+  jpa.properties.hibernate.hbm2ddl.auto: update
+
+logging:
+  file: ${spring.application.name}
+  
+  
+---  
+spring:
+  profiles: test_local
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: root
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: "SELECT 'x'"
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 50
+    
+server:
+    port: 8088
+
+
+    
+
+    
+
