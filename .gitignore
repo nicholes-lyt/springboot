@@ -17,6 +17,9 @@
 /.classpath
 /.settings
 /.caches
+/.apt_generated
+/.externalToolBuilders
+/.factorypath
 /prj.el
 /bin
 /bin.*
