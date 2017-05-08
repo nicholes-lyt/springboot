@@ -1,6 +1,7 @@
 package com.springboot.demo.controller.restful;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springboot.demo.jdbc.service.impl.UserJdbcSevice;
+import com.springboot.demo.jpa.entity.User;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * 
@@ -28,12 +31,14 @@ public class UserDataController {
 	private UserJdbcSevice userJdbcSevice;
 	
 	
-	@RequestMapping(value = "/findUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/findUser", method = RequestMethod.POST)
 	@ResponseBody
-	public String findUser(){
+	public Object findUser(){
 		Map<String, Object> map = new HashMap<>();
-		map.put("rows", userJdbcSevice.findAllUser());
-		return new JSONArray().fromObject(map).toString();
+		List<User> user = userJdbcSevice.findAllUser();
+		map.put("total", user.size());
+		map.put("rows", user);
+		return map;
 	}
 
 }

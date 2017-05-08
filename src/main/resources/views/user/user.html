@@ -5,10 +5,12 @@
         <title>user</title>
         <meta name="_csrf" th:content="${_csrf.token}"/>
         <meta name="_csrf_hader" th:content="${_csrf.headerName}"/>
-<link rel="stylesheet" href="/static/jquery-easyui-1.4.5/themes/default/easyui.css" />
-<link rel="stylesheet" href="/static/jquery-easyui-1.4.5/themes/icon.css" />
-<script src="/static/jquery-easyui-1.4.5/jquery.min.js" ></script>
-<script src="/static/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+		<link rel="stylesheet" href="/static/jquery-easyui-1.4.5/themes/default/easyui.css" />
+		<link rel="stylesheet" href="/static/jquery-easyui-1.4.5/themes/icon.css" />
+		
+		<script src="/static/jquery-easyui-1.4.5/jquery.min.js" ></script>
+		<script src="/static/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="/static/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
  </head>
     <body>
     	<h1 th:inline="text">头部：[[${	_csrf.token}]]</h1>
@@ -18,15 +20,14 @@
         <!-- <div class="datagrid-toolbar" style="height:30px;" id="toolbar">
 			    </div> -->
 			    <div style="min-height:220px;">
-			            <table id="yp"
-			            	   url="findUser"
+			            <table id="user"
 			                   border="false"         
 			                   fit="true"             
 			                   singleSelect="false"   
 			                   rownumbers="true"      
 			                   striped="true"        
 			                   idField="id"   
-			                   nowrap="true">          
+			                   nowrap="true">
 			            </table>
 			    </div>
         <form th:action="@{/logout}" method="post">
@@ -35,19 +36,24 @@
         
          <script type="text/javascript">
             var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-            $(document).ajaxSend(function(e,xhr,options){
+            var header = $("meta[name='_csrf_hader']").attr("content");
+            console.log("t="+token+" h="+header);
+            /*var request = new XMLHttpRequest();
+             $(document).ajaxSend(function(e,xhr,options){
             	xhr.setRequestHeader(header,token);
-            });
-         	/* $.ajax({
+            });  */
+         	$.ajax({
+         		headers:{"_csrf_hader":header,"_csrf":token}, 
          		type: "post",
          		url:"findUser",
+         		data:{"_csrf":token},
          		success:function(data){
          			console.log(data);
+         			$("#user").datagrid("loadData",data);
          		}
-         	}); */
+         	}); 
          	$(function(){
-         		$("#yp").datagrid({
+         		$("#user").datagrid({
                     pageNumber:1,
                     pageSize:20,
                     queryParams:{"refresh":"1"},
@@ -61,6 +67,7 @@
                         {field:'ck',checkbox:true}
                     ]],
                     columns:[[
+                    	{title:'ID',field:'id',width:'100'},
                         {title:'用户名',field:'username',width:'100'},
                         {title:'真实姓名',field:'realname',width:'100'},
                         {title:'创建时间',field:'cratedate',width:'150'},
