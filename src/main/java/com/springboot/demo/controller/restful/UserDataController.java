@@ -5,16 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.demo.jdbc.service.impl.UserJdbcSevice;
 import com.springboot.demo.jpa.entity.User;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 /**
  * 
@@ -24,7 +22,7 @@ import net.sf.json.JSONObject;
  * @version 1.0 
  * @date 2017年5月1日 下午8:11:02
  */
-@Controller()
+@RestController
 public class UserDataController {
 	
 	@Autowired

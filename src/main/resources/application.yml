@@ -2,13 +2,14 @@
 spring:
   application.name: springboot
   profiles.active: test_local
-  thymeleaf.prefix: classpath:/views/
-  thymeleaf.mode: HTML5
-  thymeleaf.encoding: UTF-8
-  thymeleaf.content-type: text/html
-  thymeleaf.cache:  false
-  jpa.generate-ddl: true
-  jpa.properties.hibernate.hbm2ddl.auto: update
+  thymeleaf:
+    prefix: classpath:/views/
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache:  false
+  #jpa.generate-ddl: true
+  #jpa.properties.hibernate.hbm2ddl.auto: update
 
 logging:
   file: ${spring.application.name}
