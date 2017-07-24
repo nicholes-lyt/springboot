@@ -49,6 +49,7 @@
          		data:{"_csrf":token},
          		success:function(data){
          			console.log(data);
+         			data = eval("("+data+")");
          			$("#user").datagrid("loadData",data);
          		}
          	}); 

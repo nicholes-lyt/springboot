@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.GsonBuilder;
 import com.springboot.demo.jdbc.service.impl.UserJdbcSevice;
 import com.springboot.demo.jpa.entity.User;
 
@@ -31,12 +32,12 @@ public class UserDataController {
 	
 	@RequestMapping(value = "/findUser", method = RequestMethod.POST)
 	@ResponseBody
-	public Object findUser(){
+	public String findUser(){
 		Map<String, Object> map = new HashMap<>();
 		List<User> user = userJdbcSevice.findAllUser();
 		map.put("total", user.size());
 		map.put("rows", user);
-		return map;
+		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(map);
 	}
 
 }
