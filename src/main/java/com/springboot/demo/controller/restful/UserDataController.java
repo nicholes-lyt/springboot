@@ -30,14 +30,10 @@ public class UserDataController {
 	private UserJdbcSevice userJdbcSevice;
 	
 	
-	@RequestMapping(value = "/findUser", method = RequestMethod.POST)
-	@ResponseBody
-	public String findUser(){
-		Map<String, Object> map = new HashMap<>();
+	@RequestMapping(value = "/findUser", method = RequestMethod.GET)
+	public List<User> findUser(){
 		List<User> user = userJdbcSevice.findAllUser();
-		map.put("total", user.size());
-		map.put("rows", user);
-		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(map);
+		return user;
 	}
 
 }
